@@ -37,13 +37,23 @@ async function run() {
         app.put('/about/:id', async (req, res) => {
             const id = req.params.id;
             const query = req.body;
-            console.log(query);
             const filter = { _id: ObjectId(id) }
             const options = { upsert: true };
             const updateDoc = {
                 $set: query
             }
             const result = await aboutCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
+        app.patch('/myMedia/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = req.body;
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: query
+            }
+            const result = await postCollection.updateOne(filter, updateDoc, options);
             res.send(result);
         });
 
